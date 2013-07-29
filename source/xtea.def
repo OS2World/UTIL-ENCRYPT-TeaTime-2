@@ -1,0 +1,53 @@
+DEFINITION MODULE XTea;
+
+(*
+
+This is a Modula-2 implementation of the XTea cipher.
+
+Copyright (c) 2001 Daniel de Kok. All rights reserved.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*)
+
+(*$XL+*)
+
+CONST Cycles = 32;
+      DELTA = 9E3779B9H;
+      KeyLen = 16;
+      BlockSize = 8;
+
+CONST Dir_Encrypt = 0;
+      Dir_Decrypt = 1;
+
+CONST Mode_ECB = 0;
+      Mode_CBC = 1;
+
+TYPE tBlock = ARRAY[0..1] OF LONGCARD;
+     tKey = ARRAY[0..3] OF LONGCARD;
+
+PROCEDURE XTea_Encrypt(VAR Plain : tBlock; Key : tKey);
+PROCEDURE XTea_Decrypt(VAR Crypted : tBlock; Key : tKey);
+PROCEDURE CryptBuf(VAR Buf : ARRAY OF SHORTCARD; Key : tKey; VAR IV : ARRAY OF SHORTCARD; Direction : SHORTCARD; Mode : SHORTCARD);
+PROCEDURE SimpleHash(VAR CharKey : ARRAY OF CHAR);
+
+END XTea.
